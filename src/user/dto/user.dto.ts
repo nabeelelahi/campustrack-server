@@ -9,6 +9,7 @@ import {
   IsEnum,
   IsArray,
   IsMongoId,
+  ValidateIf,
 } from 'class-validator';
 import { Gender, Role } from '../../base/base.dto';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
@@ -61,6 +62,11 @@ export class UserDto extends BaseCreateDto {
   @IsArray()
   @IsMongoId({ each: true })
   classes?: string[];
+  
+  @ValidateIf(o => o.role === Role.STUDENT) // only runs if role=student
+  @IsNotEmpty({ message: 'Parent is required when role is student' })
+  @IsMongoId()
+  parent?: string;
 
   verification_code?: number | string;
 

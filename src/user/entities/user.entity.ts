@@ -23,6 +23,11 @@ export const schema = new Schema({
     type: String,
     required: true,
   },
+  parent: {
+    type: Schema.ObjectId,
+    ref: 'users',
+    required: false,
+  },
   address: {
     type: String,
     default: ''

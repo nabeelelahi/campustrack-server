@@ -60,6 +60,7 @@ export enum Role {
   STUDENT = 'student',
   STAFF = 'staff',
   TEACHER = 'teacher',
+  PARENT = 'parent',
 }
 
 export enum Gender {

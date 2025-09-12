@@ -31,7 +31,9 @@ export class ClassService extends BaseService<
   protected override _beforeGetHook = async (
     _query: baseFindQueryType<typeof schema, CreateClassDto>,
   ) => {
-    const user = this.userContext.get()
+    _query.populate('teacher')
+    _query.populate('students')
+    // const user = this.userContext.get()
   };
 
 }

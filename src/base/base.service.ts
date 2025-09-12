@@ -258,6 +258,7 @@ export class BaseService<model = never, dto extends BaseCreateDto = never> {
     const _query = this._model.findOne(condition).select(select);
     if (isFunction(this._populateRelations))
       this._populateRelations(_query as never);
+    console.log(await _query.exec())
     return (await _query.exec()) as dto;
   }
 

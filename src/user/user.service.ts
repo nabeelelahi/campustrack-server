@@ -18,7 +18,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { LoginDto } from './dto/login.dto';
 import { ForgotDto } from './dto/forgot.dto';
 import { VerifyCodeDto } from './dto/verify-code.dto';
-import { baseConditionType, baseFindQueryType } from '../base/base.dto';
+import { baseConditionType, baseFindOneQueryType, baseFindQueryType } from '../base/base.dto';
 import { ResetPaswordDto } from './dto/set-password.dto';
 import { UserContext } from './user.context';
 import { ChangePaswordDto } from './dto/change-password.dto';
@@ -42,6 +42,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
     'address',
     'email',
     'username',
+    'parent',
     'image_url',
     'mobile_no',
     'gender',
@@ -52,6 +53,13 @@ export class UserService extends BaseService<typeof schema, UserDto> {
     'slug',
     'created_at',
   ];
+
+  protected override  _populateRelations = (
+    _query: baseFindOneQueryType<typeof schema, UserDto>,
+  ) => {
+    _query.populate('teacher')
+    _query.populate('students')
+  };
 
   protected override _beforeGetHook = async (
     _query: baseFindQueryType<typeof schema, UserDto>,
@@ -88,7 +96,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
     if (record.role === 'student')
       this._classService._model.updateMany(
         { _id: { $in: payload.classes } },
-        { $push: { students: record._id }  },
+        { $push: { students: record._id } },
       )
         .then(console.log)
   };
