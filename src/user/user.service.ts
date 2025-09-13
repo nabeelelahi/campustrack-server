@@ -57,8 +57,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
   protected override  _populateRelations = (
     _query: baseFindOneQueryType<typeof schema, UserDto>,
   ) => {
-    _query.populate('teacher')
-    _query.populate('students')
+    // _query.populate('teacher')
   };
 
   protected override _beforeGetHook = async (

@@ -32,6 +32,9 @@ import { PassportMarkerController } from './passport-marker/passport-marker.cont
 import { NotificationModule } from './notification/notification.module';
 import { NotificationController } from './notification/notification.controller';
 import { ClassModule } from './class/class.module';
+import { MenuItemModule } from './menu-item/menu-item.module';
+import { OrderModule } from './order/order.module';
+import { OrderController } from './order/order.controller';
 
 @Module({
   imports: [
@@ -53,6 +56,8 @@ import { ClassModule } from './class/class.module';
     PassportMarkerModule,
     NotificationModule,
     ClassModule,
+    MenuItemModule,
+    OrderModule,
   ],
   controllers: [AppController, FileController, DashboardController],
   providers: [
@@ -84,6 +89,7 @@ export class AppModule {
       )
       .forRoutes(
         UserController,
+        OrderController,
         FileController,
         ArticleController,
         CommunityController,
