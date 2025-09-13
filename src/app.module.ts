@@ -14,27 +14,12 @@ import { jwtConstants } from 'config/constants';
 import { ConfigModule } from '@nestjs/config';
 import { FileController } from './file/file.controller';
 import { UserContext } from './user/user.context';
-import { DocGuideModule } from './doc-guide/doc-guide.module';
-import { CommunityModule } from './community/community.module';
-import { ArticleModule } from './article/article.module';
-import { PassportModule } from './passport/passport.module';
-import { QuestionAnswerModule } from './question-answer/question-answer.module';
-import { ArticleController } from './article/article.controller';
-import { CommunityController } from './community/community.controller';
-import { DocGuideController } from './doc-guide/doc-guide.controller';
-import { QuestionAnswerController } from './question-answer/question-answer.controller';
-import { DashboardController } from './dashboard/dashboard.controller';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { ServiceModule } from './service/service.module';
-import { PassportController } from './passport/passport.controller';
-import { PassportMarkerModule } from './passport-marker/passport-marker.module';
-import { PassportMarkerController } from './passport-marker/passport-marker.controller';
-import { NotificationModule } from './notification/notification.module';
-import { NotificationController } from './notification/notification.controller';
 import { ClassModule } from './class/class.module';
 import { MenuItemModule } from './menu-item/menu-item.module';
 import { OrderModule } from './order/order.module';
 import { OrderController } from './order/order.controller';
+import { MenuItemController } from './menu-item/menu-item.controller';
+import { ClassController } from './class/class.controller';
 
 @Module({
   imports: [
@@ -46,20 +31,11 @@ import { OrderController } from './order/order.controller';
     }),
     MongooseModule.forRoot(dbUrl),
     UserModule,
-    DocGuideModule,
-    CommunityModule,
-    ArticleModule,
-    PassportModule,
-    QuestionAnswerModule,
-    DashboardModule,
-    ServiceModule,
-    PassportMarkerModule,
-    NotificationModule,
     ClassModule,
     MenuItemModule,
     OrderModule,
   ],
-  controllers: [AppController, FileController, DashboardController],
+  controllers: [AppController, FileController],
   providers: [
     AppService,
     FileService,
@@ -91,13 +67,8 @@ export class AppModule {
         UserController,
         OrderController,
         FileController,
-        ArticleController,
-        CommunityController,
-        DocGuideController,
-        QuestionAnswerController,
-        PassportController,
-        PassportMarkerController,
-        NotificationController
+        ClassController,
+        MenuItemController
       );
   }
 }
