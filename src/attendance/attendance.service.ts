@@ -1,14 +1,14 @@
-import { name, schema } from './entities/order.entity';
+import { name, schema } from './entities/attendance.entity';
 import { BaseService } from 'src/base/base.service';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { CreateOrderDto } from './dto/create-order.dto';
+import { CreateAttendanceDto } from './dto/create-attendance.dto';
 import { UserContext } from 'src/user/user.context';
 import { baseConditionType, baseFindOneQueryType, baseFindQueryType } from 'src/base/base.dto';
 
-export class OrderService extends BaseService<
+export class AttendaceService extends BaseService<
   typeof schema,
-  CreateOrderDto
+  CreateAttendanceDto
 > {
   constructor(
     @InjectModel(name) override _model: Model<typeof schema>,
@@ -20,37 +20,34 @@ export class OrderService extends BaseService<
   public override _softDelete = () => true;
 
   public override _fillables = () => [
-    'staff_member',
     'student',
-    'items',
-    'price',
+    'class',
+    'action',
     'status',
     'slug',
     'created_at',
   ];
 
   protected override  _populateRelations = (
-    _query: baseFindOneQueryType<typeof schema, CreateOrderDto>,
+    _query: baseFindOneQueryType<typeof schema, CreateAttendanceDto>,
   ) => {
-    _query.populate('items')
-    _query.populate('student')
-    // _query.populate('teacher')
+    _query.populate('class')
   };
 
   protected override _beforeGetHook = async (
-    _query: baseFindQueryType<typeof schema, CreateOrderDto>,
+    _query: baseFindQueryType<typeof schema, CreateAttendanceDto>,
     condition: baseConditionType,
   ) => {
     if (condition) {
+      console.log(condition)
       _query.where(condition);
     }
-    // const user = this.userContext.get()
   };
 
   public override _beforeCreateHook = async (
-    payload: CreateOrderDto,
+    payload: CreateAttendanceDto,
   ) => {
-    payload.staff_member = this.userContext.get()._id;
+    payload.student = this.userContext.get()._id;
   };
 
 }

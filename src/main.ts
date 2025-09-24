@@ -7,8 +7,8 @@ import mongooseConnect from 'database/config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = new DocumentBuilder()
-    .setTitle('BJM App API')
-    .setDescription('This is the api documentation of BMJ App API')
+    .setTitle('Campus Track API')
+    .setDescription('This is the api documentation of Campus Track')
     .addBearerAuth(
       {
         type: 'http',

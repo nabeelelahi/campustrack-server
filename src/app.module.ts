@@ -20,6 +20,8 @@ import { OrderModule } from './order/order.module';
 import { OrderController } from './order/order.controller';
 import { MenuItemController } from './menu-item/menu-item.controller';
 import { ClassController } from './class/class.controller';
+import { AttendanceModule } from './attendance/attendance.module';
+import { AttendanceController } from './attendance/attendance.controller';
 
 @Module({
   imports: [
@@ -34,6 +36,7 @@ import { ClassController } from './class/class.controller';
     ClassModule,
     MenuItemModule,
     OrderModule,
+    AttendanceModule,
   ],
   controllers: [AppController, FileController],
   providers: [
@@ -68,7 +71,8 @@ export class AppModule {
         OrderController,
         FileController,
         ClassController,
-        MenuItemController
+        MenuItemController,
+        AttendanceController
       );
   }
 }

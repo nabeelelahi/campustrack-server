@@ -66,6 +66,7 @@ export class UserService extends BaseService<typeof schema, UserDto> {
   ) => {
     if (condition) {
       _query.where(condition);
+      _query.where({ email: { $ne: 'admin@admin.com' } });
     }
   };
 
